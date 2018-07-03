@@ -76,5 +76,13 @@ module.exports = (source, opts = { foreignKeySuffix: 'Id' }) => {
     throw new Error(msg)
   }).value()
 
+  router.use((req, res, next) => {
+    if (!res.locals.data) {
+      next()
+    } else {
+    router.render(req, res)
+    }
+  })
+
   return router
 }
