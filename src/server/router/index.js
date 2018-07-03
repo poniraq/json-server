@@ -76,19 +76,5 @@ module.exports = (source, opts = { foreignKeySuffix: 'Id' }) => {
     throw new Error(msg)
   }).value()
 
-  router.use((req, res) => {
-    if (!res.locals.data) {
-      res.status(404)
-      res.locals.data = {}
-    }
-
-    router.render(req, res)
-  })
-
-  router.use((err, req, res, next) => {
-    console.error(err.stack)
-    res.status(500).send(err.stack)
-  })
-
   return router
 }
